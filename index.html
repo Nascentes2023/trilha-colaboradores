@@ -25,7 +25,6 @@
       height: 100%;
       z-index: -1;
       overflow: hidden;
-      display: none; /* oculto até o botão ser clicado */
     }
 
     .video-background iframe {
@@ -38,7 +37,6 @@
     }
 
     .content {
-      display: none; /* oculto até ativar som */
       position: relative;
       z-index: 1;
       background-color: rgba(255, 255, 255, 0.92);
@@ -100,21 +98,6 @@
       background-color: #004080;
     }
 
-    .overlay {
-      position: fixed;
-      background-color: #000;
-      color: white;
-      width: 100%;
-      height: 100%;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      flex-direction: column;
-      padding: 20px;
-    }
-
     @media (max-width: 600px) {
       .content {
         margin: 20px;
@@ -133,21 +116,8 @@
 </head>
 <body>
 
-  <!-- Overlay de permissão -->
-  <div class="overlay" id="overlay">
-    <h2>Bem-vindo à Trilha dos Colaboradores</h2>
-    <p>Clique no botão abaixo para ativar o som e iniciar</p>
-    <button onclick="iniciar()">Ativar Som e Entrar</button>
-  </div>
-
-  <!-- Áudio de fundo (grátis, do FreeSound ou Pixabay) -->
-  <audio id="audio" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_42669385e2.mp3?filename=bensound-tenderness-10794.mp3" type="audio/mpeg" />
-    Seu navegador não suporta áudio.
-  </audio>
-
   <!-- Vídeo de fundo -->
-  <div class="video-background" id="videoBg">
+  <div class="video-background">
     <iframe
       src="https://www.youtube.com/embed/aEUoNfC0Vn4?autoplay=1&mute=1&controls=0&loop=1&playlist=aEUoNfC0Vn4&modestbranding=1&showinfo=0&rel=0"
       frameborder="0"
@@ -157,7 +127,7 @@
   </div>
 
   <!-- Conteúdo principal -->
-  <div class="content" id="content">
+  <div class="content">
     <div class="logo-container">
       <img src="Logo site.png" alt="Logo da Associação" class="logo" />
     </div>
@@ -165,28 +135,9 @@
     <h1>1° TRILHA DOS COLABORADORES</h1>
     <p>Preencha para confirmar sua participação</p>
 
+    <!-- Formulário do Google Forms -->
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdABXpWA3Q-Ug1Xrgd5pBoCmIDfB_UMaihWQa8-rp73rYO4Mg/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
   </div>
-
-  <script>
-    function iniciar() {
-      console.log("Botão de som clicado!");
-      const audio = document.getElementById("audio");
-      const overlay = document.getElementById("overlay");
-      const content = document.getElementById("content");
-      const video = document.getElementById("videoBg");
-
-      audio.play().then(() => {
-        console.log("Áudio iniciado.");
-        overlay.style.display = "none";
-        video.style.display = "block";
-        content.style.display = "block";
-      }).catch(error => {
-        console.error("Erro ao iniciar o áudio:", error);
-        alert("Não foi possível iniciar o som. Verifique se seu navegador permite.");
-      });
-    }
-  </script>
 
 </body>
 </html>

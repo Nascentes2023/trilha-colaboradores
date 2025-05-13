@@ -13,8 +13,9 @@
 
     html, body {
       height: 100%;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      overflow-x: hidden;
     }
 
     .video-background {
@@ -29,7 +30,7 @@
 
     .video-background iframe {
       width: 100vw;
-      height: 56.25vw; /* Proporção 16:9 */
+      height: 56.25vw;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -37,15 +38,26 @@
       pointer-events: none;
     }
 
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 0;
+    }
+
     .content {
       position: relative;
       z-index: 1;
-      background-color: rgba(224, 213, 213, 0.92);
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 40px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
     .logo-container {
@@ -54,71 +66,63 @@
     }
 
     .logo {
-      max-width: 200px;
+      max-width: 180px;
       height: auto;
     }
 
     h1 {
       text-align: center;
-      color: #005b96;
+      color: #003366;
+      font-size: 2rem;
       margin-bottom: 10px;
     }
 
     p {
       text-align: center;
-      color: #333;
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 30px;
     }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    input, select, textarea {
+    iframe.google-form {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin-top: 20px;
-      background-color: #005b96;
-      color: white;
-      padding: 12px;
+      height: 1100px;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
+      background: transparent;
     }
 
-    button:hover {
-      background-color: #004080;
-    }
-
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .content {
         margin: 20px;
         padding: 20px;
       }
 
       .logo {
-        max-width: 150px;
+        max-width: 130px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      iframe.google-form {
+        height: 1300px;
       }
 
       .video-background iframe {
-        width: 100vw;
-        height: 56.25vw;
+        width: 177.77vh; /* 100 / (9/16) */
+        height: 100vh;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Vídeo de fundo do YouTube -->
+  <!-- Vídeo de fundo -->
   <div class="video-background">
     <iframe
       src="https://www.youtube.com/embed/aEUoNfC0Vn4?autoplay=1&mute=1&controls=0&loop=1&playlist=aEUoNfC0Vn4&modestbranding=1&showinfo=0&rel=0"
@@ -128,6 +132,9 @@
     ></iframe>
   </div>
 
+  <!-- Camada de vidro fosco -->
+  <div class="overlay"></div>
+
   <!-- Conteúdo principal -->
   <div class="content">
     <div class="logo-container">
@@ -135,28 +142,14 @@
     </div>
 
     <h1>1° TRILHA DOS COLABORADORES</h1>
-    <p>Preencha para confirmar sua participação</p>
+    <p>Preencha o formulário abaixo para confirmar sua participação no evento</p>
 
-    <form id="formulario" action="https://script.google.com/macros/s/AKfycbxdTlmXCkxC56SMrZwUs2xfmrvmszP1FCagbZxf6QJ4RNwPOWd3hcWTesfR92STr2N8/exec" method="POST">
-      <label for="nome">Nome do Colaborador</label>
-      <input type="text" id="nome" name="nome" required>
-
-      <label for="idade">Idade</label>
-      <input type="number" id="idade" name="idade" required>
-
-      <label for="condicao">Possui alguma doença ou limitação?</label>
-      <textarea id="condicao" name="condicao" rows="3" placeholder="Descreva aqui, se houver..."></textarea>
-
-      <label for="churrasco">Participará do churrasco?</label>
-      <select id="churrasco" name="churrasco" required>
-        <option value="">Selecione</option>
-        <option value="sim">Sim</option>
-        <option value="nao">Não</option>
-      </select>
-
-      <button type="submit">Enviar Formulário</button>
-    </form>
+    <!-- Google Forms incorporado -->
+    <iframe class="google-form"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdABXpWA3Q-Ug1Xrgd5pBoCmIDfB_UMaihWQa8-rp73rYO4Mg/viewform?embedded=true"
+    >Carregando…</iframe>
   </div>
 
 </body>
 </html>
+

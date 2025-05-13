@@ -21,26 +21,34 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
       overflow: hidden;
     }
 
     .video-background iframe {
-      width: 100vw;
-      height: 100vh;
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 50%;
+      left: 50%;
+      width: 177.77vh; /* 100 * (16 / 9) */
+      height: 100vh;
+      transform: translate(-50%, -50%);
       pointer-events: none;
+    }
+
+    @media (max-aspect-ratio: 16/9) {
+      .video-background iframe {
+        width: 100vw;
+        height: 56.25vw; /* 100 / (16 / 9) */
+      }
     }
 
     .content {
       position: relative;
       z-index: 1;
       background-color: rgba(255, 255, 255, 0.92);
-      max-width: 600px;
+      max-width: 700px;
       margin: 40px auto;
       padding: 30px;
       border-radius: 12px;
@@ -68,34 +76,10 @@
       color: #333;
     }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    input, select, textarea {
+    iframe.formulario {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin-top: 20px;
-      background-color: #005b96;
-      color: white;
-      padding: 12px;
+      height: 1000px;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background-color: #004080;
     }
 
     @media (max-width: 600px) {
@@ -106,10 +90,6 @@
 
       .logo {
         max-width: 150px;
-      }
-
-      .video-background iframe {
-        height: 56.25vw;
       }
     }
   </style>
@@ -126,7 +106,7 @@
     ></iframe>
   </div>
 
-  <!-- Conteúdo principal -->
+  <!-- Conteúdo -->
   <div class="content">
     <div class="logo-container">
       <img src="Logo site.png" alt="Logo da Associação" class="logo" />
@@ -135,8 +115,10 @@
     <h1>1° TRILHA DOS COLABORADORES</h1>
     <p>Preencha para confirmar sua participação</p>
 
-    <!-- Formulário do Google Forms -->
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdABXpWA3Q-Ug1Xrgd5pBoCmIDfB_UMaihWQa8-rp73rYO4Mg/viewform?embedded=true" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+    <!-- Formulário Google Forms incorporado -->
+    <iframe class="formulario"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdABXpWA3Q-Ug1Xrgd5pBoCmIDfB_UMaihWQa8-rp73rYO4Mg/viewform?embedded=true"
+    >Carregando…</iframe>
   </div>
 
 </body>
